@@ -53,7 +53,7 @@ vim.keymap.set('n', '<leader>bp', vim.cmd.bprevious, { desc = 'Move to Previous 
 
 -- Keymaps to execute the current line or file
 vim.keymap.set('n', '<leader>x', '<cmd>.lua<CR>', { desc = 'Execute the current line' })
-vim.keymap.set('n', '<leader><leader>x', '<cmd>.lua<CR>', { desc = 'Execute the current filel' })
+vim.keymap.set('n', '<leader><leader>x', '<cmd>%lua<CR>', { desc = 'Execute the current file' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
