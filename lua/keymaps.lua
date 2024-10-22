@@ -1,21 +1,20 @@
 -- [[ Basic Keymaps ]]
---  See `:help vim.keymap.set()`
+--  See `:help vim.keymap.set
+
+local set = vim.keymap.set
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
+set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
--- Clear highlights on search when pressing <Esc> in normal mode
---  See `:help hlsearch`
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -23,37 +22,50 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 --
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+-- set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+-- set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+-- set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+-- set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+-- Normally these are not good mappings, but worth trying to
+-- make navigating tabs easier this way.
+set('n', '<left>', 'gT', { desc = 'Move to Left Tap' })
+set('n', '<right>', 'gt', { desc = 'Move to Right Tap' })
 
 -- Change the height and width of a window more easier
-vim.keymap.set('n', '<M-,>', '<c-w>5<', { desc = 'Decrease the width of the window' })
-vim.keymap.set('n', '<M-.>', '<c-w>5>', { desc = 'Increase the width of the window' })
-vim.keymap.set('n', '<M-t>', '<c-w>+', { desc = 'Increase the Height of the window -- Taller' })
-vim.keymap.set('n', '<M-s>', '<c-w>-', { desc = 'Decrease the Height of the window -- Shorter' })
+set('n', '<M-,>', '<c-w>5<', { desc = 'Decrease the width of the window' })
+set('n', '<M-.>', '<c-w>5>', { desc = 'Increase the width of the window' })
+set('n', '<M-t>', '<c-w>+', { desc = 'Increase the Height of the window -- Taller' })
+set('n', '<M-s>', '<c-w>-', { desc = 'Decrease the Height of the window -- Shorter' })
 
---vim.keymap.set('n', '<leader>bn', ':bnext ', { desc = 'Move to Next Buffer' })
-vim.keymap.set('n', '<leader>bn', vim.cmd.bnext, { desc = 'Move to Next Buffer' })
-vim.keymap.set('n', '<leader>bp', vim.cmd.bprevious, { desc = 'Move to Previous Buffer' })
---vim.keymap.set('n', '<leader>bp', ':bprevious ', { desc = 'Move to Previous /Buffer' })
+--set('n', '<leader>bn', ':bnext ', { desc = 'Move to Next Buffer' })
+set('n', '<leader>bn', vim.cmd.bnext, { desc = 'Move to Next Buffer' })
+set('n', '<leader>bp', vim.cmd.bprevious, { desc = 'Move to Previous Buffer' })
+--set('n', '<leader>bp', ':bprevious ', { desc = 'Move to Previous /Buffer' })
 
 -- Keymaps to execute the current line or file
-vim.keymap.set('n', '<leader>x', '<cmd>.lua<CR>', { desc = 'Execute the current line' })
-vim.keymap.set('n', '<leader><leader>x', '<cmd>%lua<CR>', { desc = 'Execute the current file' })
+set('n', '<leader>x', '<cmd>.lua<CR>', { desc = 'Execute the current line' })
+set('n', '<leader><leader>x', '<cmd>%lua<CR>', { desc = 'Execute the current file' })
+
+-- move cursor to bottom or top of window, then centre of cursor.
+set('n', '<c-d>', '<c-d>zz', { desc = 'Move Cursor to bottom of window - then centre' })
+set('n', '<c-u>', '<c-u>zz', { desc = 'Move Cursor to top of window - then centre' })
+
+-- When you yank text and want to paste over text to replace it -
+-- this keeps the yanked text in the register, puts deleted text in _ register
+set({ 'n', 'v' }, '<leader>p', [["_dP]])
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
