@@ -1,4 +1,5 @@
 -- which-key.lua
+
 -- Useful plugin to show you pending keybinds.
 return {
   'folke/which-key.nvim',
@@ -51,6 +52,8 @@ return {
       { '<leader>s', group = '[S]earch' },
       { '<leader>w', group = '[W]orkspace' },
       { '<leader>t', group = '[T]oggle' },
+      { '<leader>q', group = '[Q]uarto' },
+      { '<leader>t', group = '[T]erminal' },
       { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
     },
   },

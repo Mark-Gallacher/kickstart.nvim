@@ -3,17 +3,37 @@
 
 local set = vim.keymap.set
 
+-- Function to make new terminal more easily
+local function new_terminal(lang)
+  vim.cmd('vsplit term://' .. lang)
+end
+
+local function new_terminal_python()
+  new_terminal 'python'
+end
+
+local function new_terminal_r()
+  new_terminal 'R --no-save'
+end
+
+local function new_terminal_ipython()
+  new_terminal 'ipython --no-confirm-exit'
+end
+
+local function new_terminal_shell()
+  new_terminal '$SHELL'
+end
+
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Diagnostic keymaps
+-- INFO: DIAGNOSTIC KEYMAPS
 set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 
 set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 
--- Diagnostic keymaps
 set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
@@ -24,15 +44,7 @@ set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]ui
 -- or just use <C-\><C-n> to exit terminal mode
 set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
--- TIP: Disable arrow keys in normal mode
--- set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
-
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---
+-- INFO: WINDOWS, TABS and BUFFERS
 --  See `:help wincmd` for a list of all window commands
 set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
@@ -50,11 +62,10 @@ set('n', '<M-.>', '<c-w>5>', { desc = 'Increase the width of the window' })
 set('n', '<M-t>', '<c-w>+', { desc = 'Increase the Height of the window -- Taller' })
 set('n', '<M-s>', '<c-w>-', { desc = 'Decrease the Height of the window -- Shorter' })
 
---set('n', '<leader>bn', ':bnext ', { desc = 'Move to Next Buffer' })
 set('n', '<leader>bn', vim.cmd.bnext, { desc = 'Move to Next Buffer' })
 set('n', '<leader>bp', vim.cmd.bprevious, { desc = 'Move to Previous Buffer' })
---set('n', '<leader>bp', ':bprevious ', { desc = 'Move to Previous /Buffer' })
 
+-- INFO: RUNNING LUA FILES
 -- Keymaps to execute the current line or file
 set('n', '<leader>x', '<cmd>.lua<CR>', { desc = 'Execute the current line' })
 set('n', '<leader><leader>x', '<cmd>%lua<CR>', { desc = 'Execute the current file' })
@@ -66,6 +77,23 @@ set('n', '<c-u>', '<c-u>zz', { desc = 'Move Cursor to top of window - then centr
 -- When you yank text and want to paste over text to replace it -
 -- this keeps the yanked text in the register, puts deleted text in _ register
 set({ 'n', 'v' }, '<leader>p', [["_dP]])
+
+-- New terminals
+set('n', '<leader>tr', function()
+  new_terminal_r()
+end, { desc = 'Create new [T]erminal - [R]' })
+
+set('n', '<leader>tp', function()
+  new_terminal_python()
+end, { desc = 'Create new [T]erminal - [Python]' })
+
+set('n', '<leader>ti', function()
+  new_terminal_ipython()
+end, { desc = 'Create new [T]erminal - [IPython]' })
+
+set('n', '<leader>ts', function()
+  new_terminal_shell()
+end, { desc = 'Create new [T]erminal - [Shell]' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`

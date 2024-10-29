@@ -40,21 +40,21 @@ return { -- You can easily change to a different colorscheme.
   -- end,
 
   -- tokyonight
-  colourConfig('folke/tokyonight.nvim', 'tokyonight', { style = 'night' }, true),
-  --
-  -- -- neofusion
-  -- colourConfig('diegoulloao/neofusion.nvim', 'neofusion', {}, true),
-  --
-  -- -- tokyodark
-  -- colourConfig('tiagovla/tokyodark.nvim', 'tokyodark', {}, true),
+  colourConfig('folke/tokyonight.nvim', 'tokyonight', { style = 'night' }, false),
 
-  -- -- catppuccin
-  -- colourConfig('catppuccin/nvim', 'catppuccin', { flavour = 'mocha' }, true),
+  -- neofusion
+  colourConfig('diegoulloao/neofusion.nvim', 'neofusion', {}, true),
 
-  -- -- nordic
-  -- colourConfig('AlexvZyl/nordic.nvim', 'nordic', {}, true),
+  -- tokyodark
+  colourConfig('tiagovla/tokyodark.nvim', 'tokyodark', {}, false),
 
-  -- -- kanagawa theme = wave, dragon or lotus
-  -- colourConfig('rebelot/kanagawa.nvim', 'kanagawa', { background = { dark = 'dragon' } }, true),
+  -- catppuccin
+  colourConfig('catppuccin/nvim', 'catppuccin', { flavour = 'mocha' }, false),
+
+  -- nordic
+  colourConfig('AlexvZyl/nordic.nvim', 'nordic', {}, false),
+
+  -- kanagawa theme = wave, dragon or lotus
+  colourConfig('rebelot/kanagawa.nvim', 'kanagawa', { background = { dark = 'dragon' } }, false),
 }
 -- vim: ts=2 sts=2 sw=2 et

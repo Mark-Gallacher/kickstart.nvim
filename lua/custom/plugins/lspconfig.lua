@@ -187,10 +187,10 @@ return {
             },
           },
 
-          -- C, C++
-          clangd = {
-            cmd = { 'clangd' },
-          },
+          -- -- C, C++
+          -- clangd = {
+          --   cmd = { 'clangd' },
+          -- },
 
           -- Lua LSP
           lua_ls = {
