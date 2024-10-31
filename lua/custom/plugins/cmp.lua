@@ -4,29 +4,10 @@ return {
   'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
   dependencies = {
-    -- Snippet Engine & its associated nvim-cmp source
     {
       'L3MON4D3/LuaSnip',
-      build = (function()
-        -- Build Step is needed for regex support in snippets.
-        -- This step is not supported in many windows environments.
-        -- Remove the below condition to re-enable on windows.
-        if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
-          return
-        end
-        return 'make install_jsregexp'
-      end)(),
-      dependencies = {
-        -- `friendly-snippets` contains a variety of premade snippets.
-        --    See the README about individual language/framework/plugin snippets:
-        --    https://github.com/rafamadriz/friendly-snippets
-        -- {
-        --   'rafamadriz/friendly-snippets',
-        --   config = function()
-        --     require('luasnip.loaders.from_vscode').lazy_load()
-        --   end,
-        -- },
-      },
+      -- follow latest release.
+      version = 'v2.*', -- Replace <CurrentMajor> by the latest released major (first number of latest release)
     },
     'saadparwaiz1/cmp_luasnip',
 
@@ -40,14 +21,46 @@ return {
     -- See `:help cmp`
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
-    luasnip.config.setup {}
+    local extras = require 'luasnip.extras'
+
+    -- local s = luasnip.snippet
+    -- local t = luasnip.text_node
+
+    -- load in my custom lua snippets (snippets in lua not just for lua language)
+    -- lazy load works better because it tracks the active filetype
+    -- allows for overlapping triggers
+    require('luasnip.loaders.from_lua').lazy_load { paths = { '~/AppData/Local/nvim/lua/custom/plugins/snippets' } }
+
+    luasnip.config.set_config {
+      history = true,
+      updateevents = 'TextChanged,TextChangedI',
+      -- explicitly declaring the variables to made global - for the files in ./snippet/
+      snip_env = {
+        s = luasnip.snippet,
+        i = luasnip.insert_node,
+        d = luasnip.dynamic_node,
+        c = luasnip.choice_node,
+        f = luasnip.function_node,
+        t = luasnip.text_node,
+        extras = require 'luasnip.extras',
+        m = extras.match,
+        fmt = require('luasnip.extras.fmt').fmt,
+        rep = extras.rep,
+      },
+    }
+
+    -- this is to test the luasnip config.
+    -- luasnip.add_snippets('all', { s('hi', { t 'hello world!' }) })
 
     cmp.setup {
+      -- tell cmp how to handle snippets
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
         end,
       },
+
+      -- tell cmp where to try to add completions
       completion = { completeopt = 'menu,menuone,noinsert' },
 
       -- For an understanding of why these mappings were
@@ -85,7 +98,6 @@ return {
         --  function $name($args)
         --    $body
         --  end
-        --
         -- <c-l> will move you to the right of each of the expansion locations.
         -- <c-h> is similar, except moving you backwards.
         ['<C-l>'] = cmp.mapping(function()
@@ -93,6 +105,7 @@ return {
             luasnip.expand_or_jump()
           end
         end, { 'i', 's' }),
+
         ['<C-h>'] = cmp.mapping(function()
           if luasnip.locally_jumpable(-1) then
             luasnip.jump(-1)
@@ -102,15 +115,17 @@ return {
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
       },
+
       sources = {
         {
           name = 'lazydev',
           -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
           group_index = 0,
         },
-        { name = 'nvim_lsp' },
         { name = 'luasnip' },
+        { name = 'nvim_lsp' },
         { name = 'path' },
+        { name = 'buffer' },
       },
     }
   end,
