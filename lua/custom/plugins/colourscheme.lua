@@ -43,10 +43,10 @@ return { -- You can easily change to a different colorscheme.
   colourConfig('folke/tokyonight.nvim', 'tokyonight', { style = 'night' }, false),
 
   -- neofusion
-  colourConfig('diegoulloao/neofusion.nvim', 'neofusion', {}, true),
+  colourConfig('diegoulloao/neofusion.nvim', 'neofusion', {}, false),
 
   -- tokyodark
-  colourConfig('tiagovla/tokyodark.nvim', 'tokyodark', {}, false),
+  colourConfig('tiagovla/tokyodark.nvim', 'tokyodark', {}, true),
 
   -- catppuccin
   colourConfig('catppuccin/nvim', 'catppuccin', { flavour = 'mocha' }, false),
@@ -56,5 +56,19 @@ return { -- You can easily change to a different colorscheme.
 
   -- kanagawa theme = wave, dragon or lotus
   colourConfig('rebelot/kanagawa.nvim', 'kanagawa', { background = { dark = 'dragon' } }, false),
+
+  -- kanagawa theme = wave, dragon or lotus
+  {
+    'sainnhe/gruvbox-material',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      -- Optionally configure and load the colorscheme
+      -- directly inside the plugin declaration.
+
+      vim.g.gruvbox_material_background = 'hard'
+      -- vim.cmd.colorscheme 'gruvbox-material'
+    end,
+  },
 }
 -- vim: ts=2 sts=2 sw=2 et
