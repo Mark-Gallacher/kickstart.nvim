@@ -50,6 +50,10 @@ set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+set('t', '<C-h>', '<C-\\><C-N><C-w><C-h>', { desc = 'Move focus to the left window' })
+set('t', '<C-l>', '<C-\\><C-N><C-w><C-l>', { desc = 'Move focus to the right window' })
+set('t', '<C-j>', '<C-\\><C-N><C-w><C-j>', { desc = 'Move focus to the lower window' })
+set('t', '<C-k>', '<C-\\><C-N><C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Normally these are not good mappings, but worth trying to
 -- make navigating tabs easier this way.
