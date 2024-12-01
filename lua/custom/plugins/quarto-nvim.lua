@@ -53,6 +53,7 @@ return {
     dependencies = {
       'jmbuhr/otter.nvim',
       'nvim-treesitter/nvim-treesitter',
+      'vim-pandoc/vim-pandoc-syntax',
     },
     config = function()
       local q = require 'quarto'
