@@ -1,7 +1,7 @@
 -- LspConfig.lua
 
-local lls_root = os.getenv("localappdata") .. "/lua-language-server"
-local lls_main = lls_root .. "/main.lua"
+-- local lls_root = os.getenv("localappdata") .. "/lua-language-server"
+-- local lls_main = lls_root .. "/main.lua"
 -- this could be windows specific
 
 return {
