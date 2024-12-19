@@ -23,7 +23,7 @@ return {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'vim', 'vimdoc', 'python', 'r', 'diff', "elixir" },
+      ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'vim', 'vimdoc', 'python', 'r', 'diff', 'elixir' },
       main = 'nvim-treesitter.configs', -- Sets main module to use for opts
       -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 
@@ -103,4 +103,3 @@ return {
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
 }
--- vim: ts=2 sts=2 sw=2 et
