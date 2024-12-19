@@ -14,7 +14,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
-vim.opt.mouse = "a"
+vim.opt.mouse = 'a'
 
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
@@ -22,12 +22,12 @@ vim.opt.showmode = false
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard = 'unnamedplus'
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.schedule(function()
-	vim.opt.clipboard = "unnamedplus"
+  vim.opt.clipboard = 'unnamedplus'
 end)
 
 -- Enable break indent
@@ -41,7 +41,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- Keep signcolumn on by default
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = 'yes'
 
 -- Decrease update time
 vim.opt.updatetime = 250
@@ -58,10 +58,10 @@ vim.opt.splitbelow = true
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 vim.opt.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
-vim.opt.inccommand = "split"
+vim.opt.inccommand = 'split'
 
 -- Show which line your cursor is on
 vim.opt.cursorline = true
@@ -69,32 +69,32 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
-vim.g.python3_host_prog = "C:/Users/markg/.virtualenvs/vim-IQcaHTq4/Scripts/python.exe"
+vim.g.python3_host_prog = 'C:/Users/markg/.virtualenvs/vim-IQcaHTq4/Scripts/python.exe'
 
-local group = vim.api.nvim_create_augroup("custom", { clear = true })
+local group = vim.api.nvim_create_augroup('custom', { clear = true })
 
-vim.api.nvim_create_autocmd("BufEnter", {
-	-- only for quarto or markdown
-	pattern = { "*.qmd", "*.md" },
-	-- turn on spell checker
-	callback = function()
-		vim.opt.spell = true
-		vim.opt.spelllang = "en_gb"
-		vim.opt.conceallevel = 1
-	end,
-	group = group,
+vim.api.nvim_create_autocmd('BufEnter', {
+  -- only for quarto or markdown
+  pattern = { '*.qmd', '*.md' },
+  -- turn on spell checker
+  callback = function()
+    vim.opt.spell = true
+    vim.opt.spelllang = 'en_gb'
+    vim.opt.conceallevel = 1
+  end,
+  group = group,
 })
 
-vim.api.nvim_create_autocmd("BufEnter", {
-	-- only for quarto or markdown
-	pattern = { "*.py" },
-	-- turn on spell checker
-	callback = function()
-		-- specifying the virtual environment for python in windows
-		-- this should be an autocommand
-		vim.g.python3_host_prog = "C:/Users/markg/.virtualenvs/vim-IQcaHTq4/Scripts/python.exe"
-	end,
-	group = group,
+vim.api.nvim_create_autocmd('BufEnter', {
+  -- only for quarto or markdown
+  pattern = { '*.py' },
+  -- turn on spell checker
+  callback = function()
+    -- specifying the virtual environment for python in windows
+    -- this should be an autocommand
+    vim.g.python3_host_prog = 'C:/Users/markg/.virtualenvs/vim-IQcaHTq4/Scripts/python.exe'
+  end,
+  group = group,
 })
 
 -- vim: ts=2 sts=2 sw=2 et

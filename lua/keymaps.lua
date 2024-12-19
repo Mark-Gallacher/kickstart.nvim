@@ -28,6 +28,9 @@ end
 vim.opt.hlsearch = true
 set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+set('n', '<leader>;w', '<cmd>w<CR>', { desc = 'Write File' })
+set('n', '<leader>;q', '<cmd>q<CR>', { desc = 'Exit File' })
+
 -- INFO: DIAGNOSTIC KEYMAPS
 set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
@@ -68,11 +71,6 @@ set('n', '<M-s>', '<c-w>-', { desc = 'Decrease the Height of the window -- Short
 
 set('n', '<leader>bn', vim.cmd.bnext, { desc = 'Move to Next Buffer' })
 set('n', '<leader>bp', vim.cmd.bprevious, { desc = 'Move to Previous Buffer' })
-
--- INFO: RUNNING LUA FILES
--- Keymaps to execute the current line or file
-set('n', '<leader>x', '<cmd>.lua<CR>', { desc = 'Execute the current line' })
-set('n', '<leader><leader>x', '<cmd>%lua<CR>', { desc = 'Execute the current file' })
 
 -- move cursor to bottom or top of window, then centre of cursor.
 set('n', '<c-d>', '<c-d>zz', { desc = 'Move Cursor to bottom of window - then centre' })
@@ -117,6 +115,31 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank()
+  end,
+})
+
+vim.api.nvim_create_autocmd('BufEnter', {
+  desc = 'Changing the Behaviour of <space>[<space>]x by filetype',
+  group = vim.api.nvim_create_augroup('custom-space-x', { clear = true }),
+  callback = function()
+    local file = vim.bo.filetype
+
+    if file == 'lua' then
+      -- INFO: RUNNING LUA FILES
+      -- Keymaps to execute the current line or file
+      set('n', '<leader>x', '<cmd>.lua<CR>', { desc = 'Execute the current line' })
+      set('v', '<leader>x', "<cmd>'<,'>lua<cr>", { desc = 'execute selected area' })
+      set('n', '<leader><leader>x', '<cmd>%lua<CR>', { desc = 'Execute the current file' })
+      set('n', '<leader><leader>w', '<cmd>write<cr><cmd>%lua<cr>', { desc = 'write and execute the current file' })
+    end
+
+    if file == 'python' then
+      -- info: running lua files
+      -- keymaps to execute the current line or file
+      set('v', '<leader>x', "<cmd>'<,'> !python<cr>", { desc = 'execute selected area' })
+      set('n', '<leader><leader>x', '<cmd>!python %<cr>', { desc = 'execute the current file' })
+      set('n', '<leader><leader>w', '<cmd>write<cr><cmd>!python %<cr>', { desc = 'write and execute the current file' })
+    end
   end,
 })
 -- vim: ts=2 sts=2 sw=2 et

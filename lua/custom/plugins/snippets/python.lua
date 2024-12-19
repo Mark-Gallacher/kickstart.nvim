@@ -1,5 +1,27 @@
 return {
 
+  -- print
+  s(
+    'print',
+    fmt(
+      [[
+print({})
+  ]],
+      { i(1, '...') }
+    )
+  ),
+
+  -- print with f string
+  s(
+    'fprint',
+    fmt(
+      [[
+print(f"{}:{{ {} }}")
+  ]],
+      { i(1, '...'), i(2, '...') }
+    )
+  ),
+
   -- multiline string
   -- """ """
   s('mlc', { t '"""', i(1), t '"""', i(0) }),
@@ -35,10 +57,10 @@ return {
     'elif',
     fmt(
       [[
-  if {}:
+if {}:
     {}
 
-  else:
+else:
     {}]],
       {
         i(1, 'cond'),
@@ -52,13 +74,13 @@ return {
     'elif',
     fmt(
       [[
-  if {}:
+if {}:
     {}
 
-  elif {}:
+elif {}:
     {}
 
-  else:
+else:
     {}]],
       {
         i(1, 'cond'),
@@ -75,7 +97,7 @@ return {
     'for',
     fmt(
       [[
-      for {} in {}:
+    for {} in {}:
         {}]],
       { i(1, 'item'), i(2, 'items'), i(3, '...') }
     )
@@ -86,7 +108,7 @@ return {
     'forr',
     fmt(
       [[
-    for {} in range({}):
+  for {} in range({}):
       {}]],
       { i(1, 'item'), i(2, 'items'), i(3, '...') }
     )
@@ -96,7 +118,7 @@ return {
     'with',
     fmt(
       [[
-  with {} as {}:
+with {} as {}:
     {}]],
       { i(1, 'expression'), i(2, 'alias'), i(3, '...') }
     )
@@ -106,8 +128,8 @@ return {
     'lambda',
     fmt(
       [[
-  lambda {}: {}
-  ]],
+lambda {}: {}
+]],
       { i(1, 'arg'), i(2, 'expression') }
     )
   ),
@@ -117,10 +139,10 @@ return {
     'def',
     fmt(
       [[
-  def {}({}):
+def {}({}):
     """{}"""
     {}
-  ]],
+]],
       {
         i(1, 'name'),
         i(2, 'args'),
@@ -135,13 +157,13 @@ return {
     'deft',
     fmt(
       [[
-  def {1}({2}:{3}): -> {4}
+def {1}({2}: {3}) -> {4}:
     """{5}
     Param: {7} ({8})
     Returns {9}
     """
     {6}
-  ]],
+]],
       {
         i(1, 'name'),
         i(2, 'args'),
@@ -160,10 +182,10 @@ return {
     'mdef',
     fmt(
       [[
-  def {}(self, {}):
+def {}(self, {}):
     """{}"""
     {}
-  ]],
+]],
       {
         i(1, 'name'),
         i(2, 'args'),
@@ -178,13 +200,13 @@ return {
     'mdeft',
     fmt(
       [[
-  def {1}(self, {2}:{3}): -> {4}
+def {1}(self, {2}: {3}) -> {4}:
     """{5}
     Param: {7} ({8})
     Returns {9}
     """
     {6}
-  ]],
+]],
       {
         i(1, 'name'),
         i(2, 'args'),
@@ -204,10 +226,10 @@ return {
     'cld',
     fmt(
       [[
-  class {}({}):
+class {}({}):
     """{}"""
     {}
-  ]],
+]],
       {
         i(1, 'ClassName'),
         i(2, 'ParentClass'),
@@ -222,18 +244,18 @@ return {
     'prop',
     fmt(
       [[
-  @property
-  def {}(self):
+@property
+def {}(self):
     """Property: {}"""
 
     return self._{}
 
-  @{}.setter
-  def {}(self, value):
+@{}.setter
+def {}(self, value):
     """Setter for {}"""
 
     self._{} = value
-    ]],
+  ]],
       {
         i(1, 'attribute'),
         rep(1),
@@ -252,7 +274,7 @@ return {
     fmt(
       [[
 except {}:
-  {}
+    {}
 ]],
       { i(1, 'Exception'), i(2, '...') }
     )
@@ -263,9 +285,9 @@ except {}:
     'exceptas',
     fmt(
       [[
-  except {} as {}:
+except {} as {}:
     {}
-  ]],
+]],
       { i(1, 'Exception'), i(2, 'e'), i(3, '...') }
     )
   ),
@@ -275,12 +297,12 @@ except {}:
     'tryexcept',
     fmt(
       [[
-  try:
+try:
     {}
 
-  except {} as {}:
+except {} as {}:
     {}
-  ]],
+]],
       { i(1, '...'), i(2, 'Exception'), i(3, 'e'), i(4, '...') }
     )
   ),
@@ -290,10 +312,10 @@ except {}:
     'exceptraise',
     fmt(
       [[
-  except {} as {}:
+except {} as {}:
 
     raise {}
-  ]],
+]],
       { i(1, 'Exception'), i(2, 'e'), i(3, '...') }
     )
   ),
@@ -303,15 +325,15 @@ except {}:
     'tryexceptfinally',
     fmt(
       [[
-  try:
+try:
     {}
 
-  except {} as {}:
+except {} as {}:
     {}
 
-  finally:
+finally:
     {}
-  ]],
+]],
       { i(1, '...'), i(2, 'Exception'), i(3, 'e'), i(4, '...'), i(5, '...') }
     )
   ),
@@ -321,8 +343,8 @@ except {}:
     'listcomp',
     fmt(
       [=[
-  [{4}{3} for {1} in {2}]
-  ]=],
+[{4}{3} for {1} in {2}]
+]=],
       { i(1, 'item'), i(2, 'items'), rep(1), i(3) }
     )
   ),
