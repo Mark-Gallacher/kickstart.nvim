@@ -456,12 +456,12 @@ def {}({}):
   s({
     trig = 'lc',
     snippetType = 'autosnippet',
-  }, fmt('[{4}{3} for {1} in {2}]', { i(1, 'item'), i(2, 'items'), rep(1), i(4) })),
+  }, fmt('[{4}{3} for {1} in {2}]', { i(1, 'item'), i(2, 'items'), rep(1), i(3) })),
 
   s({
     trig = 'lfc',
     snippetType = 'autosnippet',
-  }, fmt('[{4}{3} for {1} in {2} if {5}]', { i(1, 'item'), i(2, 'items'), rep(1), rep(2), i(5, 'cond') })),
+  }, fmt('[{4}{3} for {1} in {2} if {5}]', { i(1, 'item'), i(2, 'items'), rep(1), rep(2), i(3, 'cond') })),
 
   s(
     {
@@ -478,7 +478,7 @@ def {}({}):
       trig = 'dfc',
       snippetType = 'autosnippet',
     },
-    fmt('{<4>:<5> for <1>, <2> in <3> if <6>}', { i(1, 'key'), i(2, 'value'), i(3, 'iterable'), rep(1), rep(2), i(6, 'cond') }, {
+    fmt('{<4>:<5> for <1>, <2> in <3> if <6>}', { i(1, 'key'), i(2, 'value'), i(3, 'iterable'), rep(1), rep(2), i(4, 'cond') }, {
       delimiters = '<>',
     })
   ),
@@ -488,7 +488,7 @@ def {}({}):
       trig = 'scc',
       snippetType = 'autosnippet',
     },
-    fmt('{<4><3> for <1> in <2>}', { i(1, 'item'), i(2, 'items'), rep(1), i(4) }, {
+    fmt('{<4><3> for <1> in <2>}', { i(1, 'item'), i(2, 'items'), rep(1), i(3) }, {
       delimiters = '<>',
     })
   ),
