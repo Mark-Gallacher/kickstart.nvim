@@ -76,6 +76,10 @@ set('n', '<leader>bp', vim.cmd.bprevious, { desc = 'Move to Previous Buffer' })
 set('n', '<c-d>', '<c-d>zz', { desc = 'Move Cursor to bottom of window - then centre' })
 set('n', '<c-u>', '<c-u>zz', { desc = 'Move Cursor to top of window - then centre' })
 
+-- Move selected lines with shift+j or shift+k
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+
 -- When you yank text and want to paste over text to replace it -
 -- this keeps the yanked text in the register, puts deleted text in _ register
 set({ 'n', 'v' }, '<leader>p', [["_dP]])
@@ -96,49 +100,3 @@ end, { desc = 'Create new [T]erminal - [IPython]' })
 set('n', '<leader>ts', function()
   new_terminal_shell()
 end, { desc = 'Create new [T]erminal - [Shell]' })
-
--- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
-
--- The general format is to give the autocommand a description, then a group as it is "listening" for our actions,
--- this isolates the function being called with an action and prevents duplicates callbacks. Then we tell it what to do
--- after it is finished - ie the callback function.
---
--- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
-
--- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-})
-
-vim.api.nvim_create_autocmd('BufEnter', {
-  desc = 'Changing the Behaviour of <space>[<space>]x by filetype',
-  group = vim.api.nvim_create_augroup('custom-space-x', { clear = true }),
-  callback = function()
-    local file = vim.bo.filetype
-
-    if file == 'lua' then
-      -- INFO: RUNNING LUA FILES
-      -- Keymaps to execute the current line or file
-      set('n', '<leader>x', '<cmd>.lua<CR>', { desc = 'Execute the current line' })
-      set('v', '<leader>x', "<cmd>'<,'>lua<cr>", { desc = 'execute selected area' })
-      set('n', '<leader><leader>x', '<cmd>%lua<CR>', { desc = 'Execute the current file' })
-      set('n', '<leader><leader>w', '<cmd>write<cr><cmd>%lua<cr>', { desc = 'write and execute the current file' })
-    end
-
-    if file == 'python' then
-      -- info: running lua files
-      -- keymaps to execute the current line or file
-      set('v', '<leader>x', "<cmd>'<,'> !python<cr>", { desc = 'execute selected area' })
-      set('n', '<leader><leader>x', '<cmd>!python %<cr>', { desc = 'execute the current file' })
-      set('n', '<leader><leader>w', '<cmd>write<cr><cmd>!python %<cr>', { desc = 'write and execute the current file' })
-    end
-  end,
-})

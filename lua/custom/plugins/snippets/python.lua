@@ -1,5 +1,12 @@
-return {
+local ls = require 'luasnip'
+local s = ls.snippet
+local t = ls.text_node
+local i = ls.insert_node
+local extras = require 'luasnip.extras'
+local rep = extras.rep
+local fmt = require('luasnip.extras.fmt').fmt
 
+return {
   -- print
   s(
     'print',
@@ -340,7 +347,10 @@ finally:
 
   -- list comprehension
   s(
-    'listcomp',
+    {
+      trig = 'lc',
+      snippetType = 'autosnippet',
+    },
     fmt(
       [=[
 [{4}{3} for {1} in {2}]
@@ -359,4 +369,15 @@ isinstance({}, {})
       { i(1, 'variable'), i(2, 'type') }
     )
   ),
+
+  -- Examples of Greek letter snippets, autotriggered for efficiency
+  s({ trig = ';a', snippetType = 'autosnippet' }, {
+    t '\\alpha',
+  }),
+  s({ trig = ';b', snippetType = 'autosnippet' }, {
+    t '\\beta',
+  }),
+  s({ trig = ';g', snippetType = 'autosnippet' }, {
+    t '\\gamma',
+  }),
 }

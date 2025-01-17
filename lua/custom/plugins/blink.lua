@@ -3,7 +3,29 @@ return {
     'saghen/blink.cmp',
     dependencies = {
       'rafamadriz/friendly-snippets',
-      { 'L3MON4D3/LuaSnip', version = 'v2.*' },
+      {
+
+        'L3MON4D3/LuaSnip',
+        -- follow latest release.
+        version = 'v2.*', -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+        -- install jsregexp (optional!).
+        build = 'make install_jsregexp',
+
+        config = function()
+          local ls = require 'luasnip'
+
+          ls.config.setup {
+
+            enable_autosnippets = true,
+            update_events = { 'TextChanged', 'TextChangedI' },
+          }
+
+          -- load in my custom lua snippets (snippets in lua not just for lua language)
+          -- lazy load works better because it tracks the active filetype
+          -- allows for overlapping triggers
+          require('luasnip.loaders.from_lua').lazy_load { paths = { '~/AppData/Local/nvim/lua/custom/plugins/snippets' } }
+        end,
+      },
     },
     -- use a release tag to download pre-built binaries
     version = 'v0.*',
@@ -23,6 +45,7 @@ return {
       },
 
       snippets = {
+        preset = 'luasnip',
         expand = function(snippet)
           require('luasnip').lsp_expand(snippet)
         end,
