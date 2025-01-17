@@ -1,3 +1,56 @@
+--[[
+
+Overview of Snippets for Python:
+
+    Basics
+    - ppr => print
+    - ppf => print("f{}")
+    - mll => multi-line comment
+    - mm  => magic method i.e __init__(self):
+    - mf  => magic function - no self.
+    - nem => if name == main:
+    - ipp => import
+    - iia => import with alias
+    - ffi => from x import x
+    
+    Conditionals
+    - iif => if statement
+    - else => else statement
+    - ifel => if else statement
+    - ifee => if ifel else statement
+    - ii  => isinstance
+    
+    Loops and Expressions
+    - ffr => for loop
+    - frr => for loop using range
+    - ffn => for loop using enumerate
+    - wwi => with statement
+    - lmm => lambda statement
+    - xx  => except statement
+    - xa  => except statement with alias
+    - tx  => try except statement
+    - xr  => except and raise statements
+    - tff => try, except and finally
+    
+    Definitions
+    - dff => Simple function definition
+    - ddf => Function with DocString
+    - dtf => Function with Types and DocString
+    - dmm => Simple Method definition
+    - ddm => Method with DocString
+    - dtm => Method with Types and DocString
+    - cd  => Simple Class definition
+    - ccd => Child Class definition
+    - prop => Setter and Getter
+    
+    Comprehensions
+    - lc  => List comprehension
+    - lfc => List comprehension with filter
+    - dc  => definition comprehension 
+    - dfc  => definition comprehension with filter
+    - scc => Set comprehension
+--]]
+
 local ls = require 'luasnip'
 local s = ls.snippet
 local t = ls.text_node
@@ -5,33 +58,18 @@ local i = ls.insert_node
 local extras = require 'luasnip.extras'
 local rep = extras.rep
 local fmt = require('luasnip.extras.fmt').fmt
+local ai = require 'luasnip.nodes.absolute_indexer'
 
 return {
   -- print
-  s(
-    'print',
-    fmt(
-      [[
-print({})
-  ]],
-      { i(1, '...') }
-    )
-  ),
+  s({ trig = 'ppr', snippetType = 'autosnippet' }, fmt('print({})', { i(1, '...') })),
 
   -- print with f string
-  s(
-    'fprint',
-    fmt(
-      [[
-print(f"{}:{{ {} }}")
-  ]],
-      { i(1, '...'), i(2, '...') }
-    )
-  ),
+  s({ trig = 'ppf', snippetType = 'autosnippet' }, fmt('print(f"{}")', { i(1, '...') })),
 
   -- multiline string
   -- """ """
-  s('mlc', { t '"""', i(1), t '"""', i(0) }),
+  s({ trig = 'mll', snippetType = 'autosnippet' }, { t '"""', i(1), t '"""', i(0) }),
 
   -- magic method
   -- __init__(self, ):
@@ -45,30 +83,31 @@ print(f"{}:{{ {} }}")
   s('nem', { t { 'if __name__ == "__main__":', '\t' }, i(0, 'main()') }),
 
   -- import
-  s('imp', { t 'import ', i(1) }),
+  s({ trig = 'iip', snippetType = 'autosnippet' }, { t 'import ', i(1) }),
 
   -- import ... as ...
-  s('ima', { t 'import ', i(1), t ' as ', i(2) }),
+  s({ trig = 'iia', snippetType = 'autosnippet' }, { t 'import ', i(1), t ' as ', i(2) }),
 
   -- from ... import ...
-  s('fmp', { t 'from ', i(1), t ' import ', i(2) }),
+  s({ trig = 'ffp', snippetType = 'autosnippet' }, { t 'from ', i(1), t ' import ', i(2) }),
 
   -- if statement
-  s('if', { t 'if ', i(1, 'cond'), t { ':', '\t' }, i(2, '...') }),
+  s({ trig = 'iif', snippetType = 'autosnippet' }, { t 'if ', i(1, 'cond'), t { ':', '\t' }, i(2, '...') }),
 
   -- else statement
-  s('els', { t { 'else:', '\t' }, i(1, '...') }),
+  s({ trig = 'else', snippetType = 'autosnippet' }, { t { 'else:', '\t' }, i(1, '...') }),
 
   -- if else statement
   s(
-    'elif',
+    { trig = 'ifel', snippetType = 'autosnippet' },
+
     fmt(
       [[
-if {}:
-    {}
+  if {}:
+      {}
 
-else:
-    {}]],
+  else:
+      {}]],
       {
         i(1, 'cond'),
         i(2, '...'),
@@ -78,17 +117,17 @@ else:
   ),
   -- if, elif, else block statement
   s(
-    'elif',
+    { trig = 'ifee', snippetType = 'autosnippet' },
     fmt(
       [[
-if {}:
-    {}
+  if {}:
+      {}
 
-elif {}:
-    {}
+  elif {}:
+      {}
 
-else:
-    {}]],
+  else:
+      {}]],
       {
         i(1, 'cond'),
         i(2, '...'),
@@ -101,18 +140,28 @@ else:
 
   -- for loops
   s(
-    'for',
+    { trig = 'ffr', snippetType = 'autosnippet' },
     fmt(
       [[
-    for {} in {}:
-        {}]],
+      for {} in {}:
+          {}]],
+      { i(1, 'item'), i(2, 'items'), i(3, '...') }
+    )
+  ),
+
+  s(
+    { trig = 'ffn', snippetType = 'autosnippet' },
+    fmt(
+      [[
+      for i, {} in enumerate({}):
+          {}]],
       { i(1, 'item'), i(2, 'items'), i(3, '...') }
     )
   ),
 
   -- for loops with range
   s(
-    'forr',
+    { trig = 'frr', snippetType = 'autosnippet' },
     fmt(
       [[
   for {} in range({}):
@@ -122,7 +171,7 @@ else:
   ),
   -- with
   s(
-    'with',
+    { trig = 'wwi', snippetType = 'autosnippet' },
     fmt(
       [[
 with {} as {}:
@@ -131,25 +180,34 @@ with {} as {}:
     )
   ),
   -- lambda
+  s({ trig = 'lmm', snippetType = 'autosnippet' }, fmt('lambda {}: {}', { i(1, 'arg'), i(2, 'expression') })),
+
   s(
-    'lambda',
+    { trig = 'dff', snippetType = 'autosnippet' },
     fmt(
       [[
-lambda {}: {}
+def {}({}):
+    {}
+    return {}
 ]],
-      { i(1, 'arg'), i(2, 'expression') }
+      {
+        i(1, 'name'),
+        i(2, 'args'),
+        i(3, '...'),
+        i(4, 'None'),
+      }
     )
   ),
 
   -- function definition
   s(
-    'def',
+    { trig = 'ddf', snippetType = 'autosnippet' },
     fmt(
       [[
-def {}({}):
-    """{}"""
-    {}
-]],
+  def {}({}):
+      """{}"""
+      {}
+  ]],
       {
         i(1, 'name'),
         i(2, 'args'),
@@ -161,16 +219,16 @@ def {}({}):
 
   -- function definition with types
   s(
-    'deft',
+    { trig = 'dtf', snippetType = 'autosnippet' },
     fmt(
       [[
-def {1}({2}: {3}) -> {4}:
-    """{5}
-    Param: {7} ({8})
-    Returns {9}
-    """
-    {6}
-]],
+  def {1}({2}: {3}) -> {4}:
+      """{5}
+      Param: {7} ({8})
+      Returns {9}
+      """
+      {6}
+  ]],
       {
         i(1, 'name'),
         i(2, 'args'),
@@ -186,13 +244,28 @@ def {1}({2}: {3}) -> {4}:
   ),
   -- Method definition
   s(
-    'mdef',
+    { trig = 'dmm', snippetType = 'autosnippet' },
     fmt(
       [[
-def {}(self, {}):
-    """{}"""
-    {}
-]],
+  def {}(self, {}):
+      {}
+  ]],
+      {
+        i(1, 'name'),
+        i(2, 'args'),
+        i(3, '...'),
+      }
+    )
+  ),
+
+  s(
+    { trig = 'ddm', snippetType = 'autosnippet' },
+    fmt(
+      [[
+  def {}(self, {}):
+      """{}"""
+      {}
+  ]],
       {
         i(1, 'name'),
         i(2, 'args'),
@@ -204,16 +277,16 @@ def {}(self, {}):
 
   -- Method definition with types
   s(
-    'mdeft',
+    { trig = 'dtm', snippetType = 'autosnippet' },
     fmt(
       [[
-def {1}(self, {2}: {3}) -> {4}:
-    """{5}
-    Param: {7} ({8})
-    Returns {9}
-    """
-    {6}
-]],
+  def {1}(self, {2}: {3}) -> {4}:
+      """{5}
+      Param: {7} ({8})
+      Returns {9}
+      """
+      {6}
+  ]],
       {
         i(1, 'name'),
         i(2, 'args'),
@@ -228,15 +301,34 @@ def {1}(self, {2}: {3}) -> {4}:
     )
   ),
 
-  -- Class
   s(
-    'cld',
+    {
+      trig = 'cd',
+      snippetType = 'autosnippet',
+    },
     fmt(
       [[
-class {}({}):
-    """{}"""
-    {}
-]],
+  class {}:
+      def __init__(self, {}):
+          self.{} = {}
+  ]],
+      {
+        i(1, 'ClassName'),
+        i(2, 'arg'),
+        rep(2),
+        rep(2),
+      }
+    )
+  ),
+  -- Class
+  s(
+    { trig = 'ccd', snippetType = 'autosnippet' },
+    fmt(
+      [[
+  class {}({}):
+      """{}"""
+      {}
+  ]],
       {
         i(1, 'ClassName'),
         i(2, 'ParentClass'),
@@ -251,18 +343,18 @@ class {}({}):
     'prop',
     fmt(
       [[
-@property
-def {}(self):
-    """Property: {}"""
+  @property
+  def {}(self):
+      """Property: {}"""
 
-    return self._{}
+      return self._{}
 
-@{}.setter
-def {}(self, value):
-    """Setter for {}"""
+  @{}.setter
+  def {}(self, value):
+      """Setter for {}"""
 
-    self._{} = value
-  ]],
+      self._{} = value
+    ]],
       {
         i(1, 'attribute'),
         rep(1),
@@ -277,107 +369,132 @@ def {}(self, value):
 
   -- Except statement
   s(
-    'except',
+    {
+      trig = 'xx',
+      snippetType = 'autosnippet',
+    },
     fmt(
       [[
-except {}:
-    {}
-]],
+  except {}:
+      {}
+  ]],
       { i(1, 'Exception'), i(2, '...') }
     )
   ),
 
   -- Except statement with alias
   s(
-    'exceptas',
+    {
+      trig = 'xa',
+      snippetType = 'autosnippet',
+    },
     fmt(
       [[
-except {} as {}:
-    {}
-]],
+  except {} as {}:
+      {}
+  ]],
       { i(1, 'Exception'), i(2, 'e'), i(3, '...') }
     )
   ),
 
   -- try except block
   s(
-    'tryexcept',
+    {
+      trig = 'tx',
+      snippetType = 'autosnippet',
+    },
     fmt(
       [[
-try:
-    {}
+  try:
+      {}
 
-except {} as {}:
-    {}
-]],
+  except {} as {}:
+      {}
+  ]],
       { i(1, '...'), i(2, 'Exception'), i(3, 'e'), i(4, '...') }
     )
   ),
 
   --except and raise
   s(
-    'exceptraise',
+    {
+      trig = 'xr',
+      snippetType = 'autosnippet',
+    },
     fmt(
       [[
-except {} as {}:
+  except {} as {}:
 
-    raise {}
-]],
+      raise {}
+  ]],
       { i(1, 'Exception'), i(2, 'e'), i(3, '...') }
     )
   ),
 
   -- try except finally
   s(
-    'tryexceptfinally',
+    {
+      trig = 'tff',
+      snippetType = 'autosnippet',
+    },
     fmt(
       [[
-try:
-    {}
+  try:
+      {}
 
-except {} as {}:
-    {}
+  except {} as {}:
+      {}
 
-finally:
-    {}
-]],
+  finally:
+      {}
+  ]],
       { i(1, '...'), i(2, 'Exception'), i(3, 'e'), i(4, '...'), i(5, '...') }
     )
   ),
 
   -- list comprehension
+  s({
+    trig = 'lc',
+    snippetType = 'autosnippet',
+  }, fmt('[{4}{3} for {1} in {2}]', { i(1, 'item'), i(2, 'items'), rep(1), i(4) })),
+
+  s({
+    trig = 'lfc',
+    snippetType = 'autosnippet',
+  }, fmt('[{4}{3} for {1} in {2} if {5}]', { i(1, 'item'), i(2, 'items'), rep(1), rep(2), i(5, 'cond') })),
+
   s(
     {
-      trig = 'lc',
+      trig = 'dc',
       snippetType = 'autosnippet',
     },
-    fmt(
-      [=[
-[{4}{3} for {1} in {2}]
-]=],
-      { i(1, 'item'), i(2, 'items'), rep(1), i(3) }
-    )
+    fmt('{<4>:<5> for <1>, <2> in <3>}', { i(1, 'key'), i(2, 'value'), i(3, 'iterable'), rep(1), rep(2) }, {
+      delimiters = '<>',
+    })
   ),
 
-  -- isinstance
   s(
-    'isin',
-    fmt(
-      [[
-isinstance({}, {})
-]],
-      { i(1, 'variable'), i(2, 'type') }
-    )
+    {
+      trig = 'dfc',
+      snippetType = 'autosnippet',
+    },
+    fmt('{<4>:<5> for <1>, <2> in <3> if <6>}', { i(1, 'key'), i(2, 'value'), i(3, 'iterable'), rep(1), rep(2), i(6, 'cond') }, {
+      delimiters = '<>',
+    })
   ),
 
-  -- Examples of Greek letter snippets, autotriggered for efficiency
-  s({ trig = ';a', snippetType = 'autosnippet' }, {
-    t '\\alpha',
-  }),
-  s({ trig = ';b', snippetType = 'autosnippet' }, {
-    t '\\beta',
-  }),
-  s({ trig = ';g', snippetType = 'autosnippet' }, {
-    t '\\gamma',
-  }),
+  s(
+    {
+      trig = 'scc',
+      snippetType = 'autosnippet',
+    },
+    fmt('{<4><3> for <1> in <2>}', { i(1, 'item'), i(2, 'items'), rep(1), i(4) }, {
+      delimiters = '<>',
+    })
+  ),
+  -- isinstance
+  s({
+    trig = 'ii',
+    snippetType = 'autosnippet',
+  }, fmt('isinstance({1}, {2})', { i(1, 'var'), i(2, 'type') })),
 }
