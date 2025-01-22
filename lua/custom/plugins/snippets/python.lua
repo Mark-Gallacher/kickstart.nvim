@@ -5,7 +5,7 @@ Overview of Snippets for Python:
     Basics
     - ppr => print
     - ppf => print("f{}")
-    - mll => multi-line comment
+    - mll => multi-line commentpython
     - mm  => magic method i.e __init__(self):
     - mf  => magic function - no self.
     - nem => if name == main:
@@ -58,7 +58,6 @@ local i = ls.insert_node
 local extras = require 'luasnip.extras'
 local rep = extras.rep
 local fmt = require('luasnip.extras.fmt').fmt
-local ai = require 'luasnip.nodes.absolute_indexer'
 
 return {
   -- print
@@ -69,7 +68,16 @@ return {
 
   -- multiline string
   -- """ """
-  s({ trig = 'mll', snippetType = 'autosnippet' }, { t '"""', i(1), t '"""', i(0) }),
+  s(
+    { trig = 'mll', snippetType = 'autosnippet' },
+    fmt(
+      [[
+"""
+{}
+"""]],
+      { i(1) }
+    )
+  ),
 
   -- magic method
   -- __init__(self, ):

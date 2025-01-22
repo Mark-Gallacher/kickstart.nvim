@@ -1,6 +1,16 @@
 return {
   'danymat/neogen',
-  config = true,
+  config = function()
+    local ng = require 'neogen'
+
+    ng.setup {
+      snippet_engine = true,
+      languages = {
+        ['lua.emmylua'] = require 'neogen.configurations.cpp',
+        ['python.numpydoc'] = require 'neogen.configurations.python',
+      },
+    }
+  end,
   -- Uncomment next line if you want to follow only stable versions
   version = '*',
 }

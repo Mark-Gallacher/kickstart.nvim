@@ -1,12 +1,31 @@
+local function get_path()
+  -- get the os and initialise the root path
+  local os = vim.loop.os_uname().sysname
+  local root = ''
+  -- get the current directory
+  -- local cwd = vim.fn.getcwd()
+  -- local vaults = { 'General', 'General/Ideas', 'General/Reference', 'General/Files' }
+
+  -- if we are running windows or os is not known - assume windows
+  if os == 'Windows_NT' or os == nil then
+    root = 'D:/Documents/obsidian/'
+    -- assume we are using linux - so we know what ~ means
+  else
+    -- something like vim.fn.expand "~/obsidian/"
+    root = root .. ''
+  end
+
+  return root .. 'General/*'
+end
+
 return {
   {
     'epwalsh/obsidian.nvim',
     -- import the latest verions
     version = '*',
     lazy = true,
-    -- not sure this is needed
-    ft = 'markdown',
 
+    event = 'BufReadPre D:/Documents/obsidian/General/*.md',
     -- this might be better than the cond option.
     -- event = "BufReadPre " .. vim.fn.expand("~") .. "obsidian/General/*.md"
     -- specify the dependencies.
@@ -17,35 +36,6 @@ return {
     -- only load when we open the general obsidian value - ie not when we open a markdown or quarto doc
     -- TODO: Change the paths to work on difference computer - i.e. linux
     --
-    -- enabled = function()
-    --   -- get the os and initialise the root path
-    --   local os = vim.loop.os_uname().sysname
-    --   local root = ''
-    --
-    --   -- if we are running windows or os is not known - assume windows
-    --   if os == 'Windows_NT' or os == nil then
-    --     root = root .. 'D:/Documents/obsidian/'
-    --
-    --   -- assume we are using linux - so we know what ~ means
-    --   else
-    --     -- something like vim.fn.expand "~/obsidian/"
-    --     root = root .. ''
-    --   end
-    --
-    --   -- get the current directory
-    --   local cwd = vim.fn.getcwd()
-    --   local vaults = { 'General', 'General/Ideas', 'General/Reference', 'General/Files' }
-    --
-    --   -- check if we are inside a folder inside a Vault
-    --   for _, vault in ipairs(vaults) do
-    --     local full_path = root .. vault
-    --     if cwd == full_path then
-    --       return true
-    --     end
-    --   end
-    --
-    --   -- not inside a vault directory
-    --   return false
     -- end,
     opts = {
 
@@ -60,7 +50,7 @@ return {
       -- Optional, completion of wiki links, local markdown links, and tags using nvim-cmp.
       completion = {
         -- Set to false to disable completion.
-        nvim_cmp = true,
+        nvim_cmp = false,
         -- Trigger completion at 2 chars.
         min_chars = 2,
       },
