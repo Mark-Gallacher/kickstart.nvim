@@ -38,7 +38,8 @@ return {
 
           -- load in my custom lua snippets (snippets in lua not just for lua language)
           -- lazy load works better because it tracks the active filetype
-          -- allows for overlapping triggers
+          -- allows for overlapping trigger
+          require('luasnip.loaders.from_vscode').lazy_load()
           require('luasnip.loaders.from_lua').lazy_load { paths = { '~/AppData/Local/nvim/lua/custom/plugins/snippets' } }
         end,
       },
@@ -48,7 +49,7 @@ return {
 
     opts = {
 
-      keymap = { preset = 'default' },
+      keymap = { preset = 'default', ['<Tab>'] = {} },
 
       appearance = {
         -- Sets the fallback highlight groups to nvim-cmp's highlight groups
@@ -80,6 +81,12 @@ return {
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer' },
+        providers = {
+          lsp = { name = 'lsp', score_offset = 50 },
+          path = { name = 'path', score_offset = 25 },
+          snippets = { name = 'snippets', score_offset = 80 },
+          buffer = { name = 'buffer', score_offset = 10 },
+        },
         -- optionally disable cmdline completions
         -- cmdline = {},
       },

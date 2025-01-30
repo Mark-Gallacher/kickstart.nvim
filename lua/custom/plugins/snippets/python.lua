@@ -18,7 +18,7 @@ Overview of Snippets for Python:
     - else => else statement
     - ifel => if else statement
     - ifee => if ifel else statement
-    - ii  => isinstance
+    - iis => isinstance
     
     Loops and Expressions
     - ffr => for loop
@@ -502,7 +502,7 @@ def {}({}):
   ),
   -- isinstance
   s({
-    trig = 'ii',
+    trig = 'iis',
     snippetType = 'autosnippet',
   }, fmt('isinstance({1}, {2})', { i(1, 'var'), i(2, 'type') })),
 }

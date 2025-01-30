@@ -4,7 +4,7 @@ return {
     local ng = require 'neogen'
 
     ng.setup {
-      snippet_engine = true,
+      snippet_engine = false,
       languages = {
         ['lua.emmylua'] = require 'neogen.configurations.cpp',
         ['python.numpydoc'] = require 'neogen.configurations.python',
