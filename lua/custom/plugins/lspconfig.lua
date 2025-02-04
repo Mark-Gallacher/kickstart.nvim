@@ -148,7 +148,9 @@ return {
                     -- optional settings
                     settings = {},
                 },
-                -- lexical = get_lexical_cmd(),
+
+                tailwindcss = {},
+                html = {}
             },
         },
 

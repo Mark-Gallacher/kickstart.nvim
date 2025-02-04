@@ -56,17 +56,33 @@ return {
                         end
                     end, { silent = true })
 
-                    ls.config.setup {
 
-                        enable_autosnippets = true,
-                        update_events = { 'TextChanged', 'TextChangedI' },
-                    }
 
                     -- load in my custom lua snippets (snippets in lua not just for lua language)
                     -- lazy load works better because it tracks the active filetype
                     -- allows for overlapping trigger
                     require('luasnip.loaders.from_vscode').lazy_load()
                     require('luasnip.loaders.from_lua').lazy_load { paths = get_custom_snippets() }
+
+                    ls.config.setup {
+
+                        enable_autosnippets = true,
+                        update_events = { 'TextChanged', 'TextChangedI' }
+
+                    }
+
+                    ls.filetype_extend("heex", { "html", "elixir" })
+
+                    local list_snips = function()
+                        local ft_list = require("luasnip").available()[vim.o.filetype]
+                        local ft_snips = {}
+                        for _, item in pairs(ft_list) do
+                            ft_snips[item.trigger] = item.name
+                        end
+                        print(vim.inspect(ft_snips))
+                    end
+
+                    vim.api.nvim_create_user_command("SnipList", list_snips, {})
                 end,
             },
         },
