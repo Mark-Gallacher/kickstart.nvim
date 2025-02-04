@@ -98,6 +98,7 @@ return {
           settings = {
             bashIde = {
               globPattern = '*@(.sh|.inc|.bash|.command)',
+
             },
           },
         },
@@ -139,7 +140,9 @@ return {
           -- optional settings
           settings = {},
         },
-        -- lexical = get_lexical_cmd(),
+
+        tailwindcss = {},
+        html = {}
       },
     },
 
