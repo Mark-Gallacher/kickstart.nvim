@@ -14,6 +14,24 @@ vim.api.nvim_create_autocmd('BufEnter', {
 
 vim.api.nvim_create_autocmd('BufEnter', {
   -- only for quarto or markdown
+  pattern = { '*.qmd', '*.md' },
+  -- turn on spell checker
+  callback = function()
+    vim.keymap.set('n', '<leader>tc', function()
+      local level = vim.o.conceallevel
+
+      if level == 0 then
+        vim.opt.conceallevel = 1
+      elseif level == 1 then
+        vim.opt.conceallevel = 0
+      end
+    end)
+  end,
+  group = group,
+})
+
+vim.api.nvim_create_autocmd('BufEnter', {
+  -- only for quarto or markdown
   pattern = { '*.py' },
   -- turn on spell checker
   callback = function()
