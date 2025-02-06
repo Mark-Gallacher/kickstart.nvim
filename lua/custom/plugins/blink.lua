@@ -66,7 +66,7 @@ return {
           }
 
           ls.filetype_extend('heex', { 'html', 'elixir' })
-          ls.filetype_extend('quarto', { 'markdown', 'python' })
+          ls.filetype_extend('quarto', { 'python' })
 
           local list_snips = function()
             local ft_list = require('luasnip').available()[vim.o.filetype]
