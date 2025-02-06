@@ -77,8 +77,8 @@ set('n', '<c-d>', '<c-d>zz', { desc = 'Move Cursor to bottom of window - then ce
 set('n', '<c-u>', '<c-u>zz', { desc = 'Move Cursor to top of window - then centre' })
 
 -- Move selected lines with shift+j or shift+k
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
-vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+set('v', 'J', ":m '>+1<CR>gv=gv")
+set('v', 'K', ":m '<-2<CR>gv=gv")
 
 -- When you yank text and want to paste over text to replace it -
 -- this keeps the yanked text in the register, puts deleted text in _ register
