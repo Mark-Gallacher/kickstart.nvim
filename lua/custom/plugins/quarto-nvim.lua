@@ -86,11 +86,11 @@ return {
       -- keymaps - might be neat to not use lua functions
       -- INFO: Generates the preview i.e. runs quarto preview on current buffer
       nset('<leader>qp', function()
-        q.quartoPreview()
+        q.quartoPreview { args = '--output-dir quarto' }
       end, '[P]review the [Q]uarto Document')
 
       nset('<leader>qq', function()
-        q.quartoClosePreview()
+        q.quartoClosePreview { args = '--output-dir quarto' }
       end, '[Q]uiet [Q]uarto Preview')
 
       nset('<leader>qa', function()
