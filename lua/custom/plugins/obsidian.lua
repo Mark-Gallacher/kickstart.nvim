@@ -18,6 +18,8 @@ local function get_path()
   return root .. 'General/*'
 end
 
+vim.api.nvim_set_keymap('n', '<leader>ob', ':ObsidianBacklinks <CR>', {})
+
 return {
   {
     'epwalsh/obsidian.nvim',
@@ -61,6 +63,10 @@ return {
       --  * "current_dir" - put new notes in same directory as the current buffer.
       --  * "notes_subdir" - put new notes in the default notes subdirectory.
       new_notes_location = 'notes_subdir',
+
+      note_id_func = function(title)
+        return title
+      end,
 
       templates = {
         folder = 'Templates',
