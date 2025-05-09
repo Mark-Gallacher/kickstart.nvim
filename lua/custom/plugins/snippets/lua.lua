@@ -1,8 +1,7 @@
 return {
-
   -- basic code snippet form
   s(
-    'sniptemp',
+    'snippet',
     fmt(
       [=[
   s("{}", fmt([[

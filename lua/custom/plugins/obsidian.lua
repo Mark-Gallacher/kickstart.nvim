@@ -22,7 +22,8 @@ vim.api.nvim_set_keymap('n', '<leader>ob', ':ObsidianBacklinks <CR>', {})
 
 return {
   {
-    'epwalsh/obsidian.nvim',
+    'obsidian-nvim/obsidian.nvim',
+    -- 'epwalsh/obsidian.nvim',
     -- import the latest verions
     version = '*',
     lazy = true,
@@ -53,8 +54,9 @@ return {
       completion = {
         -- Set to false to disable completion.
         nvim_cmp = false,
+        blink = true,
         -- Trigger completion at 2 chars.
-        min_chars = 2,
+        min_chars = 1,
       },
 
       -- Optional, if you keep notes in a specific subdirectory of your vault.

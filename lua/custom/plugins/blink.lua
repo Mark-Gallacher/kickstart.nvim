@@ -119,10 +119,28 @@ return {
       sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer' },
         providers = {
-          lsp = { name = 'lsp', score_offset = 50 },
-          path = { name = 'path', score_offset = 25 },
-          snippets = { name = 'snippets', score_offset = 80 },
-          buffer = { name = 'buffer', score_offset = 10 },
+          lsp = {
+            name = 'lsp',
+            score_offset = 0,
+            max_items = 5,
+          },
+          path = {
+            name = 'path',
+            score_offset = 0,
+            max_items = 5,
+          },
+          snippets = {
+            name = 'snippets',
+            score_offset = 5,
+            min_keyword_length = 2,
+            max_items = 5,
+          },
+          buffer = {
+            name = 'buffer',
+            score_offset = 10,
+            min_keyword_length = 4,
+            max_items = 4,
+          },
         },
         -- optionally disable cmdline completions
         -- cmdline = {},
