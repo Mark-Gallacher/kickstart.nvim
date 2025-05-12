@@ -98,7 +98,6 @@ return {
           settings = {
             bashIde = {
               globPattern = '*@(.sh|.inc|.bash|.command)',
-
             },
           },
         },
@@ -142,7 +141,7 @@ return {
         },
 
         tailwindcss = {},
-        html = {}
+        html = { filetypes = { 'html', 'heex' } },
       },
     },
 
