@@ -18,3 +18,6 @@ require 'lazy-bootstrap'
 
 -- [[ Configure and install plugins ]]
 require 'lazy-plugins'
+
+-- [[ Configure the LSPs ]]
+-- TODO: rewrite the mason-lspconfig to align with the new api, it should be simpler to work with in the future
