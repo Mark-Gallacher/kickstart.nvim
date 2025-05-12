@@ -16,9 +16,9 @@ end
 local get_custom_snippets = function()
   local my_os = check_os()
   if my_os == 'windows' then
-    return { '~/AppData/Local/nvim/lua/custom/plugins/snippets' }
+    return { '~/AppData/Local/nvim/lua/plugins/snippets' }
   end
-  return { '~/.config/nvim/lua/custom/plugins/snippets' }
+  return { '~/.config/nvim/lua/plugins/snippets' }
 end
 
 return {
