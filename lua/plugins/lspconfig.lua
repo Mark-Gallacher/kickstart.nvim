@@ -35,9 +35,8 @@ local get_lexical_cmd = function()
     return nil
   end
 
-  require { '/home/markgallacher/.config/lexical/_build/dev/package/lexical/bin/start_lexical.sh' }
+  return { '/home/markgallacher/.config/lexical/_build/dev/package/lexical/bin/start_lexical.sh' }
 
-  return nil
 end
 
 local lua_cmd = get_lua_cmd()
