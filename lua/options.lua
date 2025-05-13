@@ -30,7 +30,7 @@ vim.opt.clipboard = 'unnamedplus'
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.schedule(function()
-  vim.opt.clipboard = 'unnamedplus'
+    vim.opt.clipboard = 'unnamedplus'
 end)
 
 -- Enable break indent
@@ -75,6 +75,6 @@ vim.opt.scrolloff = 10
 
 -- configure the lsp diagnostic output
 vim.diagnostic.config {
-  virtual_lines = true,
-  -- virtual_text = true,
+    virtual_lines = true,
+    -- virtual_text = true,
 }
