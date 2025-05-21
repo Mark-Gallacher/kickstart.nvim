@@ -116,7 +116,7 @@ return {
                     lsp = {
                         name = 'lsp',
                         score_offset = 0,
-                        max_items = 5,
+                        max_items = 10,
                     },
                     path = {
                         name = 'path',
@@ -133,7 +133,7 @@ return {
                         name = 'buffer',
                         score_offset = 10,
                         min_keyword_length = 1,
-                        max_items = 4,
+                        max_items = 10,
                     },
                 },
             },
