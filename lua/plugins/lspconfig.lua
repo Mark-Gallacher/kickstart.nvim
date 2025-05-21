@@ -35,7 +35,12 @@ local get_lexical_cmd = function()
         return nil
     end
 
-    return { '/home/markgallacher/.config/lexical/_build/dev/package/lexical/bin/start_lexical.sh' }
+    local root_path = vim.fn.stdpath("config")
+    root_path = root_path:gsub("%nvim", "")
+
+    return {
+        root_path .. 'lexical/_build/dev/package/lexical/bin/start_lexical.sh'
+    }
 end
 
 local lua_cmd = get_lua_cmd()
@@ -125,9 +130,9 @@ return {
                     settings = {},
                 },
 
-                tailwindcss_language_server = {},
+                tailwindcss = {},
 
-                html_lsp = { filetypes = { 'html', 'heex' } },
+                html = { filetypes = { 'html', 'heex' } },
             },
         },
 
