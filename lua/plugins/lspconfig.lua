@@ -67,10 +67,6 @@ return {
             'mason-org/mason-lspconfig.nvim',
             'WhoIsSethDaniel/mason-tool-installer.nvim',
             'saghen/blink.cmp',
-
-            -- Useful status updates for LSP.
-            -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-            { 'j-hui/fidget.nvim',    opts = {} },
         },
 
         opts = {
@@ -78,10 +74,6 @@ return {
             servers = {
 
                 -- Python LSP
-                -- pyright = {
-                --     cmd = { 'pyright-langserver', '--stdio' },
-                --     filetypes = { 'python', 'py' },
-                -- },
                 ruff = {},
 
                 -- R LSP
@@ -106,15 +98,9 @@ return {
                     filetypes = { 'markdown', 'markdown.mdx', 'quarto' },
                 },
 
-                -- -- C, C++
-                -- clangd = {
-                --   cmd = { 'clangd' },
-                -- },
 
                 -- Lua LSP
-
                 lua_ls = {
-                    -- cmd = { "lua-language-server", "-E", lls_main },
                     cmd = lua_cmd,
                     filetypes = { 'lua' },
                     settings = {
@@ -168,11 +154,6 @@ return {
             vim.api.nvim_create_autocmd('LspAttach', {
                 group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
                 callback = function(event)
-                    -- NOTE: Remember that Lua is a real programming language, and as such it is possible
-                    -- to define small helper and utility functions so you don't have to repeat yourself.
-                    --
-                    -- In this case, we create a function that lets us more easily define mappings specific
-                    -- for LSP related items. It sets the mode, buffer and description for us each time.
                     local map = function(keys, func, desc)
                         vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
                     end
@@ -197,28 +178,11 @@ return {
 
                     map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
-                    -- The following two autocommands are used to highlight references of the
-                    -- word under your cursor when your cursor rests there for a little while.
-                    --    See `:help CursorHold` for information about when this is executed
-                    --
-                    -- When you move your cursor, the highlights will be cleared (the second autocommand).
-                    local client = vim.lsp.get_client_by_id(event.data.client_id)
-                    if client and client.server_capabilities.documentHighlightProvider then
-                        vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-                            buffer = event.buf,
-                            callback = vim.lsp.buf.document_highlight,
-                        })
-
-                        vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-                            buffer = event.buf,
-                            callback = vim.lsp.buf.clear_references,
-                        })
-                    end
-
                     -- The following code creates a keymap to toggle inlay hints in your
                     -- code, if the language server you are  using supports them
                     --
                     -- This may be unwanted, since they displace some of your code
+                    local client = vim.lsp.get_client_by_id(event.data.client_id)
                     if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
                         map('<leader>th', function()
                             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
