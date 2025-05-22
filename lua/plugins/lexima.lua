@@ -1,3 +1,4 @@
-return {
-  'cohama/lexima.vim',
-}
+-- return {
+--   'cohama/lexima.vim',
+-- }
+return {}
