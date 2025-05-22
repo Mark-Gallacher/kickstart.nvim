@@ -71,6 +71,11 @@ return {
             { 'mason-org/mason.nvim', config = true },
             'mason-org/mason-lspconfig.nvim',
             'WhoIsSethDaniel/mason-tool-installer.nvim',
+            {
+                -- Notification Configuration
+                "j-hui/fidget.nvim",
+                opts = {}
+            },
             'saghen/blink.cmp',
         },
 
