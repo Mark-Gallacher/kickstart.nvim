@@ -5,69 +5,66 @@
 ---@param active boolean
 ---@return table
 local function colourConfig(colourscheme, name, opts, active)
-  return {
-    colourscheme,
-    lazy = false,
-    priority = 1000,
-    config = function()
-      local n = require(name)
-      n.setup(opts)
-      if active then
-        vim.cmd.colorscheme(name)
-      end
-    end,
-  }
+    return {
+        colourscheme,
+        lazy = false,
+        priority = 1000,
+        config = function()
+            local n = require(name)
+            opts = opts or {}
+            active = active or false
+
+            n.setup(opts)
+
+            if active then
+                vim.o.background = "dark"
+                vim.cmd.colorscheme(name)
+            end
+        end,
+    }
 end
 
-return { -- You can easily change to a different colorscheme.
-  -- Change the name of the colorscheme plugin below, and then
-  -- change the command in the config to whatever the name of that colorscheme is.
-  --
-  -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-  -- 'folke/tokyonight.nvim',
-  -- -- 'tiagovla/tokyodark.nvim',
-  -- priority = 1000, -- Make sure to load this before all the other start plugins.
-  -- init = function()
-  --   -- Load the colorscheme here.
-  --   -- Like many other themes, this one has different styles, and you could load
-  --   -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-  --
-  --   vim.cmd.colorscheme 'tokyonight-night'
-  --   -- vim.cmd.colorscheme 'neofusion'
-  --
-  --   -- You can configure highlights by doing something like:
-  --   vim.cmd.hi 'Comment gui=none'
-  -- end,
+return {
 
-  -- tokyonight
-  colourConfig('folke/tokyonight.nvim', 'tokyonight', { style = 'night' }, false),
+    -- tokyonight
+    ---@diagnostic disable-next-line: missing-parameter
+    colourConfig('folke/tokyonight.nvim', 'tokyonight', { style = 'night' }),
 
-  -- neofusion
-  colourConfig('diegoulloao/neofusion.nvim', 'neofusion', {}, false),
+    -- neofusion
+    ---@diagnostic disable-next-line: missing-parameter
+    colourConfig('diegoulloao/neofusion.nvim', 'neofusion'),
 
-  -- tokyodark
-  colourConfig('tiagovla/tokyodark.nvim', 'tokyodark', {}, true),
+    -- tokyodark
+    ---@diagnostic disable-next-line: missing-parameter
+    colourConfig('tiagovla/tokyodark.nvim', 'tokyodark', {}, true),
 
-  -- catppuccin
-  colourConfig('catppuccin/nvim', 'catppuccin', { flavour = 'mocha' }, false),
+    -- catppuccin
+    ---@diagnostic disable-next-line: missing-parameter
+    colourConfig('catppuccin/nvim', 'catppuccin', { flavour = 'mocha' }),
 
-  -- nordic
-  colourConfig('AlexvZyl/nordic.nvim', 'nordic', {}, false),
+    -- nordic
+    ---@diagnostic disable-next-line: missing-parameter
+    colourConfig('AlexvZyl/nordic.nvim', 'nordic'),
 
-  -- kanagawa theme = wave, dragon or lotus
-  colourConfig('rebelot/kanagawa.nvim', 'kanagawa', { background = { dark = 'dragon' } }, false),
+    -- kanagawa theme = wave, dragon or lotus
+    ---@diagnostic disable-next-line: missing-parameter
+    colourConfig('rebelot/kanagawa.nvim', 'kanagawa', { background = { dark = 'dragon' } }),
 
-  -- kanagawa theme = wave, dragon or lotus
-  {
-    'sainnhe/gruvbox-material',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      -- Optionally configure and load the colorscheme
-      -- directly inside the plugin declaration.
+    -- monet theme
+    ---@diagnostic disable-next-line: missing-parameter
+    colourConfig("fynnfluegge/monet.nvim", "monet"),
 
-      vim.g.gruvbox_material_background = 'hard'
-      -- vim.cmd.colorscheme 'gruvbox-material'
-    end,
-  },
+    -- gruvbox
+    {
+        'sainnhe/gruvbox-material',
+        lazy = false,
+        priority = 1000,
+        config = function()
+            -- Optionally configure and load the colorscheme
+            -- directly inside the plugin declaration.
+
+            vim.g.gruvbox_material_background = 'hard'
+            -- vim.cmd.colorscheme 'gruvbox-material'
+        end,
+    },
 }
