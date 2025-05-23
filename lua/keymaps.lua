@@ -5,23 +5,23 @@ local set = vim.keymap.set
 
 -- Function to make new terminal more easily
 local function new_terminal(lang)
-  vim.cmd('vsplit term://' .. lang)
+    vim.cmd('vsplit term://' .. lang)
 end
 
 local function new_terminal_python()
-  new_terminal 'python'
+    new_terminal 'python'
 end
 
 local function new_terminal_r()
-  new_terminal 'R --no-save'
+    new_terminal 'R --no-save'
 end
 
 local function new_terminal_ipython()
-  new_terminal 'ipython --no-confirm-exit'
+    new_terminal 'ipython --no-confirm-exit'
 end
 
 local function new_terminal_shell()
-  new_terminal '$SHELL'
+    new_terminal '$SHELL'
 end
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
@@ -29,11 +29,14 @@ vim.opt.hlsearch = true
 set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 set('n', '<leader>;w', '<cmd>w<CR>', { desc = 'Write File' })
+set('n', '<leader>;x', '<cmd>wq<CR>', { desc = 'Write and Exit File' })
 set('n', '<leader>;q', '<cmd>q<CR>', { desc = 'Exit File' })
 
 -- INFO: DIAGNOSTIC KEYMAPS
-set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+set('n', '[d', function() vim.diagnostic.jump({ count = 1, float = true }) end,
+    { desc = 'Go to previous [D]iagnostic message' })
+set('n', ']d', function() vim.diagnostic.jump({ count = -1, float = true }) end,
+    { desc = 'Go to next [D]iagnostic message' })
 
 set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 
@@ -57,6 +60,9 @@ set('t', '<C-h>', '<C-\\><C-N><C-w><C-h>', { desc = 'Move focus to the left wind
 set('t', '<C-l>', '<C-\\><C-N><C-w><C-l>', { desc = 'Move focus to the right window' })
 set('t', '<C-j>', '<C-\\><C-N><C-w><C-j>', { desc = 'Move focus to the lower window' })
 set('t', '<C-k>', '<C-\\><C-N><C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+set("n", "<leader>wv", "<C-w>v", { desc = "Create [W]indow [V]ertical Split" })
+set("n", "<leader>ws", "<C-w>s", { desc = "Create [W]indow [S]plit" })
 
 -- Normally these are not good mappings, but worth trying to
 -- make navigating tabs easier this way.
@@ -83,20 +89,35 @@ set('v', 'K', ":m '<-2<CR>gv=gv")
 -- When you yank text and want to paste over text to replace it -
 -- this keeps the yanked text in the register, puts deleted text in _ register
 set({ 'n', 'v' }, '<leader>p', [["_dP]])
+set({ 'n', 'v' }, '<leader>d', [["_d]])
 
 -- New terminals
 set('n', '<leader>tr', function()
-  new_terminal_r()
+    new_terminal_r()
 end, { desc = 'Create new [T]erminal - [R]' })
 
 set('n', '<leader>tp', function()
-  new_terminal_python()
+    new_terminal_python()
 end, { desc = 'Create new [T]erminal - [Python]' })
 
 set('n', '<leader>ti', function()
-  new_terminal_ipython()
+    new_terminal_ipython()
 end, { desc = 'Create new [T]erminal - [IPython]' })
 
 set('n', '<leader>ts', function()
-  new_terminal_shell()
+    new_terminal_shell()
 end, { desc = 'Create new [T]erminal - [Shell]' })
+
+
+-- Toggle virtual lines and text
+set('n', '<leader>dt', function()
+    vim.diagnostic.config {
+        virtual_lines = not vim.diagnostic.config().virtual_lines,
+        virtual_text = not vim.diagnostic.config().virtual_text,
+    }
+end, { desc = '[D]iagnostics [T]oggle - virtual lines and virtual text' })
+
+
+set('n', '<leader>dh', function()
+    vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end, { desc = '[D]iagnostics [H]ide - all' })
