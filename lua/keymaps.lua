@@ -89,7 +89,7 @@ set('v', 'K', ":m '<-2<CR>gv=gv")
 -- When you yank text and want to paste over text to replace it -
 -- this keeps the yanked text in the register, puts deleted text in _ register
 set({ 'n', 'v' }, '<leader>p', [["_dP]])
-set({ 'n', 'v' }, '<leader>d', [["_d]])
+-- set({ 'n', 'v' }, '<leader>d', [["_d]])
 
 -- New terminals
 set('n', '<leader>tr', function()
