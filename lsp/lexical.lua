@@ -1,7 +1,7 @@
 -- Elixir
 local get_lexical_cmd = function()
-    local has_windows = vim.fn.has("windows")
-    if has_windows == 1 then
+    local has_unix = vim.fn.has("unix")
+    if has_unix == 0 then
         return nil
     end
 
