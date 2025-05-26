@@ -54,10 +54,10 @@ return {
             { '<leader>q',        group = '[Q]uarto' },
             { '<leader>d',        group = '[D]iagnostic' },
             { '<leader>t',        group = '[T]erminal' },
-            { '<leader>h',        group = '[H]arpoon' },
+            { '<leader>m',        group = '[M]arks (Harpoon)' },
             { '<leader>g',        group = '[G]et' },
             { '<leader><leader>', group = 'Execute File' },
-            { '<leader>h',        group = 'Git [H]unk',  mode = { 'n', 'v' } },
+            { '<leader>h',        group = 'Git [H]unk',       mode = { 'n', 'v' } },
         },
     },
 }
