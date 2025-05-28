@@ -42,9 +42,10 @@ return {
         vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
         vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
         vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = '[S]earch (existing) [B]uffers' })
+        vim.keymap.set('n', '<leader>sc', builtin.git_status, { desc = '[S]earch git [C]hanges' })
 
         -- See full list of custom colour schemes - remove default ones
-        vim.keymap.set('n', '<leader>sc', function()
+        vim.keymap.set('n', '<leader>sC', function()
             builtin.colorscheme { enable_preview = true, ignore_builtins = true }
         end, { desc = '[S]earch [C]olourschemes' })
 
