@@ -29,8 +29,10 @@ vim.opt.hlsearch = true
 set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 set('n', '<leader>;w', '<cmd>w<CR>', { desc = 'Write File' })
+set('n', '<leader>;W', '<cmd>wa<CR>', { desc = 'Write File' })
 set('n', '<leader>;x', '<cmd>wq<CR>', { desc = 'Write and Exit File' })
 set('n', '<leader>;q', '<cmd>q<CR>', { desc = 'Exit File' })
+set('n', '<leader>;Q', '<cmd>qa<CR>', { desc = 'Exit File' })
 
 -- INFO: DIAGNOSTIC KEYMAPS
 set('n', '[d', function() vim.diagnostic.jump({ count = 1, float = true }) end,
@@ -113,10 +115,10 @@ end, { desc = 'Create new [T]erminal - [Shell]' })
 set('n', '<leader>dt', function()
     vim.diagnostic.config {
         virtual_lines = not vim.diagnostic.config().virtual_lines,
-        virtual_text = not vim.diagnostic.config().virtual_text,
+        -- virtual_text = not vim.diagnostic.config().virtual_text,
     }
+    require("tiny-inline-diagnostic").toggle()
 end, { desc = '[D]iagnostics [T]oggle - virtual lines and virtual text' })
-
 
 set('n', '<leader>dh', function()
     vim.diagnostic.enable(not vim.diagnostic.is_enabled())
