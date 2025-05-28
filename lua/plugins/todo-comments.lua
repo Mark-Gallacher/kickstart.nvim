@@ -16,8 +16,15 @@ return {
             require("todo-comments").jump_prev()
         end, { desc = "Previous todo comment" })
 
-        vim.keymap.set("n", "<leader>st", "<cmd>TodoTelescope<CR>", { desc = "[S]earch [T]odo Comments" })
+        vim.keymap.set("n", "<leader>st", "<cmd>TodoTelescope keywords=TODO,FIX<CR>",
+            { desc = "[S]earch [T]odo Comments (todo + fix)" })
 
-        vim.keymap.set("n", "<leader>sq", "<cmd>TodoQuickFix<CR>", { desc = "[S]earch Todo [Q]uickfix" })
+        vim.keymap.set("n", "<leader>sT", "<cmd>TodoTelescope<CR>",
+            { desc = "[S]earch [T]odo Comments (all)" })
+
+        vim.keymap.set("n", "<leader>sq", "<cmd>TodoQuickFix keywords=TODO,FIX<CR>",
+            { desc = "[S]earch Todo [Q]uickfix (todo + fix)" })
+
+        vim.keymap.set("n", "<leader>sQ", "<cmd>TodoQuickFix<CR>", { desc = "[S]earch Todo [Q]uickfix (all)" })
     end
 }
