@@ -2,6 +2,9 @@
 return {
     { -- Adds git related signs to the gutter, as well as utilities for managing changes
         'lewis6991/gitsigns.nvim',
+        dependencies = {
+            "sindrets/diffview.nvim",
+        },
         opts = {
             signs = {
                 add = { text = '+' },
@@ -12,6 +15,18 @@ return {
             },
             on_attach = function(bufnr)
                 local gitsigns = require 'gitsigns'
+                require 'diffview'.setup({
+                    file_panel = {
+                        win_config = {
+                            width = 0, --default is 35
+                        },
+                    },
+                    file_history_panel = {
+                        win_config = {
+                            height = 10, --default is 16
+                        },
+                    }
+                })
 
                 local function map(mode, l, r, opts)
                     opts = opts or {}
@@ -52,7 +67,12 @@ return {
                 map('n', '<leader>hp', gitsigns.preview_hunk, { desc = 'git [p]review hunk' })
                 map('n', '<leader>hP', gitsigns.preview_hunk_inline, { desc = 'git [P]review deleted lines' })
                 map('n', '<leader>hb', gitsigns.toggle_current_line_blame, { desc = 'git [b]lame line' })
-                map('n', '<leader>hd', gitsigns.diffthis, { desc = 'git [d]iff against index' })
+                map('n', '<leader>hd', "<cmd>DiffviewOpen<cr><esc><c-w>l", { desc = 'git [d]iff against index' })
+                map('n', '<leader>hh', "<cmd>DiffviewFileHistory %<cr>", { desc = 'git [h]istory for file' })
+                map('n', '<leader>hm', "<cmd>DiffviewOpen origin/main<cr><esc><c-w>l",
+                    { desc = 'git [d]iff against main' })
+                map('n', '<leader>hM', "<cmd>DiffviewOpen origin/master<cr><esc><c-w>l",
+                    { desc = 'git [d]iff against master' })
                 map('n', '<leader>hD', function()
                     gitsigns.diffthis '@'
                 end, { desc = 'git [D]iff against last commit' })
