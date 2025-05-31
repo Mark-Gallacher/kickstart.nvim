@@ -12,12 +12,18 @@ return {
         'selene.toml',
         'selene.yml',
         '.git',
+        vim.uv.cwd()
     },
     settings = {
         Lua = {
+            runtime = {version = "LuaJIT"},
             hint = { enable = true },
             telemetry = { enable = false },
-            workspace = { checkThirdParty = false },
+            workspace = { 
+                preloadFileSize = 500,
+                checkThirdParty = false,
+                library = { vim.env.VIMRUNTIME},
+            },
             completion = { callSnippet = "Replace" },
             diagnostics = {
                 globals = { "vim" },
@@ -26,3 +32,5 @@ return {
         },
     },
 }
+
+

@@ -52,7 +52,7 @@ return {
             { '<leader>w',        group = '[W]indows' },
             -- { '<leader>t', group = '[T]oggle' },
             { '<leader>q',        group = '[Q]uarto' },
-            { '<leader>d',        group = '[D]iagnostic' },
+            -- { '<leader>d',        group = '[D]iagnostic' },
             { '<leader>t',        group = '[T]erminal' },
             { '<leader>m',        group = '[M]arks (Harpoon)' },
             { '<leader>g',        group = '[G]et' },

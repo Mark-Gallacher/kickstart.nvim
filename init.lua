@@ -13,11 +13,25 @@ require 'options'
 -- [[ Basic Keymaps ]]
 require 'keymaps'
 
--- [[ LSP SETUP ]]
-require 'lsp'
+-- [[ Autocommands ]]
+require 'autocmd'
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 require 'lazy-bootstrap'
 
 -- [[ Configure and install plugins ]]
 require 'lazy-plugins'
+
+-- [[ LSP SETUP ]]
+require 'lsp'
+
+-- Read the LSP configuration Files
+local lsp_dir = vim.fn.stdpath 'config' .. '/lsp/'
+
+-- Iterate over all files inside the lsp directory
+for _, file in ipairs(vim.fn.readdir(lsp_dir)) do
+    if file:match("%.lua$") then
+        local name = file:gsub("%.lua$", "")
+        vim.lsp.enable(name)
+    end
+end

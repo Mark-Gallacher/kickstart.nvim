@@ -81,8 +81,10 @@ return {
             },
         },
         -- use a release tag to download pre-built binaries
-        version = 'v0.*',
+        version = '1.*',
 
+        ---@module 'blink.cmp'
+        ---@type blink.cmp.Config
         opts = {
 
             keymap = { preset = 'default', ['<Tab>'] = {} },
@@ -141,5 +143,15 @@ return {
             -- experimental signature help support
             signature = { enabled = true },
         },
+        
+        config = function(_, opts)
+
+            require("blink-cmp").setup(opts)
+            
+            local capabilities = require("blink.cmp").get_lsp_capabilities()
+            vim.lsp.config("*", { capabilities = capabilities })
+
+        end
+
     },
 }

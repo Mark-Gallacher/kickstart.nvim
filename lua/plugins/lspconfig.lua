@@ -20,8 +20,7 @@ return {
         "mason-org/mason.nvim",
         opts = {},
         dependencies = {
-            "mason-org/mason-lspconfig.nvim",
-            "neovim/nvim-lspconfig",
+            "williamboman/mason-lspconfig.nvim",
             -- Notification Configuration
             { "j-hui/fidget.nvim", opts = {} },
         },
