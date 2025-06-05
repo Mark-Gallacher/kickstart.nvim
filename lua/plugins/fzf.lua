@@ -73,7 +73,7 @@ return {
         end, "[S]earch [O]bsidian Vault")
 
         -- Search (Grep)
-        set("sg", f.live_grep, "[S]earch by [G]rep")
+        set("sp", f.live_grep, "[S]earch by [G]rep")
         set("sw", f.grep_cword, "[S]earch [W]ord")
         set("s/", f.lgrep_curbuf, "[S]earch [/] Buffer by Grep")
 

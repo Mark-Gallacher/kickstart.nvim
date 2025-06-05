@@ -65,6 +65,7 @@ return {
                     }
 
                     ls.filetype_extend('heex', { 'html', 'elixir' })
+                    ls.filetype_extend('elixir', { 'html', 'eelixir' })
                     ls.filetype_extend('quarto', { 'python' })
 
                     local list_snips = function()
@@ -143,14 +144,12 @@ return {
             -- experimental signature help support
             signature = { enabled = true },
         },
-        
-        config = function(_, opts)
 
+        config = function(_, opts)
             require("blink-cmp").setup(opts)
-            
+
             local capabilities = require("blink.cmp").get_lsp_capabilities()
             vim.lsp.config("*", { capabilities = capabilities })
-
         end
 
     },

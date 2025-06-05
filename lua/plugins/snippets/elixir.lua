@@ -11,13 +11,13 @@ Overview of Snippets for Elixir
   - dsm => DocString for Module
   - ddb => Do End Block
   - ggb => Guard Block
-  - ;m => Map
+  - ;mm => Map
   - ;st => Struct
   - ;c => Case
 
   Pipe Snippets
   - ;p => Pipe on new line
-  - ;d => Pipe into dbg()
+  - ;db => Pipe into dbg()
   - ;sp => Pipe into String
   - ;lp => Pipe into List
   - ;mp => Pipe into Map
@@ -66,7 +66,7 @@ local i = ls.insert_node
 -- local rep = extras.rep
 local fmt = require('luasnip.extras.fmt').fmt
 
-local ok = {
+return {
   -- INFO: Basics
 
   -- Puts
@@ -160,7 +160,7 @@ end]],
 
   -- Map
   s(
-    { trig = ';m', snippetType = 'autosnippet' },
+    { trig = ';mm', snippetType = 'autosnippet' },
     fmt(
       [[%{{ {} }}]],
       { i(1) }
@@ -207,7 +207,7 @@ end]],
 
   -- Pipe Character into dbg()
   s(
-    { trig = ';d', snippetType = 'autosnippet' },
+    { trig = ';db', snippetType = 'autosnippet' },
     fmt(
       [[
 
@@ -606,5 +606,4 @@ end
   ),
 
 }
-return ok
 -- vim: ts=2 sts=2 sw=2 et
