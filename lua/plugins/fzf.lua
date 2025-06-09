@@ -18,12 +18,14 @@ return {
                     ["ctrl-s"] = a.file_split,
                     ["ctrl-v"] = a.file_vsplit,
                     ["ctrl-t"] = a.file_tabedit,
-                    ["ctrl-q"] = a.file_sel_to_qf,
+                    ["ctrl-Q"] = a.file_sel_to_qf, -- Send only selected items to qf
+                    ["ctrl-q"] = "select-all+accept",
                 },
             },
             keymap = {
                 builtin = {
-                    ["ctrl-h"] = "toggle-help",
+                    ["alt-h"] = "toggle-help",
+                    ["alt-a"] = "toggle-all",
                     ["ctrl-f"] = "toggle-fullscreen",
                     ["ctrl-p"] = "toggle-preview",
                 },
