@@ -10,7 +10,6 @@ return {
 
         -- INFO: Configuration
         f.setup({
-            "hide", -- hide fzf instead of closing it - better for resuming last search
             -- Not changing many of theses, more to have a reference of the useful ones.
             actions = {
                 files = {
