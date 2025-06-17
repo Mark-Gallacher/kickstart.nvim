@@ -1,6 +1,16 @@
 local group = vim.api.nvim_create_augroup('custom_autocommands', { clear = true })
 
 vim.api.nvim_create_autocmd('BufEnter', {
+    pattern = { '*.R', '*.Rmd', '*.qmd' },
+    -- set indents to 2
+    callback = function()
+        vim.opt.tabstop = 2
+        vim.opt.shiftwidth = 2
+    end,
+    group = group,
+})
+
+vim.api.nvim_create_autocmd('BufEnter', {
     -- only for quarto or markdown
     pattern = { '*.qmd', '*.md' },
     -- turn on spell checker
