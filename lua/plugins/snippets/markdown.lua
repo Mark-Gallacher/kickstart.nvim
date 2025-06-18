@@ -6,7 +6,6 @@ local i = ls.insert_node
 -- local extras = require 'luasnip.extras'
 -- local rep = extras.rep
 local fmt = require('luasnip.extras.fmt').fmt
-local fmta = require('luasnip.extras.fmt').fmta
 
 return {
 
@@ -30,5 +29,5 @@ return {
   ),
 
   -- obsidian link
-  s({ trig = 'llf', snippetType = 'autosnippet' }, fmt('[[{}|{}]]', { i(1, 'filename'), i(2, 'alias') })),
+  s({ trig = 'llf', snippetType = 'autosnippet' }, fmt('[[{}', { i(1, 'filename') })),
 }
