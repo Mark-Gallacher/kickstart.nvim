@@ -58,3 +58,10 @@ vim.opt.scrolloff = 10
 
 -- Have a global status bar instead
 vim.o.laststatus = 3
+
+-- Folds
+vim.o.foldmethod = 'expr'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
+vim.o.foldenable = false
+vim.o.foldlevel = 20
