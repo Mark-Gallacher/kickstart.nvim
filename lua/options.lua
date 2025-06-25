@@ -59,6 +59,9 @@ vim.opt.scrolloff = 10
 -- Have a global status bar instead
 vim.o.laststatus = 3
 
+-- Set Default Conceal level to 2
+vim.opt.conceallevel = 2
+
 -- Folds
 vim.o.foldmethod = 'expr'
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'

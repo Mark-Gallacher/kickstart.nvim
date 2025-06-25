@@ -17,7 +17,6 @@ vim.api.nvim_create_autocmd('BufEnter', {
   callback = function()
     vim.opt.spell = true
     vim.opt.spelllang = 'en_gb'
-    vim.opt.conceallevel = 1
   end,
   group = group,
 })
@@ -33,7 +32,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
       if level ~= 0 then
         vim.opt.conceallevel = 0
       else
-        vim.opt.conceallevel = 3
+        vim.opt.conceallevel = 2
       end
     end, { desc = '[T]oggle [C]onceal Level' })
 
