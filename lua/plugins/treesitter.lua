@@ -1,5 +1,6 @@
 -- treesitter.lua
 return {
+  { 'nvim-treesitter/nvim-treesitter-textobjects' },
   {
     -- Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
     'nvim-treesitter/nvim-treesitter-context',
@@ -40,6 +41,7 @@ return {
         'css',
         'html',
         'heex',
+        'yaml',
       },
       main = 'nvim-treesitter.configs', -- Sets main module to use for opts
       -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
@@ -88,19 +90,19 @@ return {
           set_jumps = true, -- whether to set jumps in the jumplist
           goto_next_start = {
             [']m'] = '@function.outer',
-            [']]'] = '@class.inner',
+            [']]'] = '@block.inner',
           },
           goto_next_end = {
             [']M'] = '@function.outer',
-            [']['] = '@class.outer',
+            [']['] = '@block.outer',
           },
           goto_previous_start = {
             ['[m'] = '@function.outer',
-            ['[['] = '@class.inner',
+            ['[['] = '@block.inner',
           },
           goto_previous_end = {
             ['[M'] = '@function.outer',
-            ['[]'] = '@class.outer',
+            ['[]'] = '@block.outer',
           },
         },
       },
