@@ -5,25 +5,28 @@ local set = vim.keymap.set
 
 -- Function to make new terminal more easily
 local function new_terminal(lang)
-    vim.cmd('vsplit term://' .. lang)
+  vim.cmd('vsplit term://' .. lang)
 end
 
 local function new_terminal_python()
-    new_terminal 'python'
+  new_terminal 'python'
 end
 
 local function new_terminal_r()
-    new_terminal 'R --no-save'
+  new_terminal 'R --no-save'
+end
+
+local function new_terminal_radian()
+  new_terminal 'radian'
 end
 
 local function new_terminal_ipython()
-    new_terminal 'ipython --no-confirm-exit'
+  new_terminal 'ipython --no-confirm-exit'
 end
 
 local function new_terminal_shell()
-    new_terminal '$SHELL'
+  new_terminal '$SHELL'
 end
-
 
 -- INFO: Core Keymaps
 --
@@ -44,7 +47,6 @@ set('n', '<leader>;Q', '<cmd>qa<CR>', { desc = 'Exit File' })
 -- is not what someone will guess without a bit more experience.
 set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
-
 -- INFO: Editing Shortcuts
 
 -- When you yank text and want to paste over text to replace it -
@@ -56,8 +58,7 @@ set({ 'n', 'v' }, '<leader>d', [["_d]])
 -- function()^
 -- body end
 -- ^ represents current cursor position
-set("n", "<c-s>", "a<cr><esc>k$", { desc = "Split Current Line" })
-
+set('n', '<c-s>', 'a<cr><esc>k$', { desc = 'Split Current Line' })
 
 -- INFO: Visual Mode
 
@@ -65,13 +66,11 @@ set("n", "<c-s>", "a<cr><esc>k$", { desc = "Split Current Line" })
 set('v', 'J', ":m '>+1<CR>gv=gv")
 set('v', 'K', ":m '<-2<CR>gv=gv")
 
-
 -- INFO: Insert Mode
 
 -- Move Cursor to start and end of line in insert mode
-set("i", "<c-b>", "<c-o>^", { desc = "Move cursor to start of line" })
-set("i", "<c-f>", "<c-o>$", { desc = "Move cursor to end of line" })
-
+set('i', '<c-b>', '<c-o>^', { desc = 'Move cursor to start of line' })
+set('i', '<c-f>', '<c-o>$', { desc = 'Move cursor to end of line' })
 
 -- INFO: Navigation
 
@@ -83,7 +82,6 @@ set('n', '<right>', 'gt', { desc = 'Move to Right Tap' })
 -- move cursor to bottom or top of window, then centre of cursor.
 set('n', '<c-d>', '<c-d>zz', { desc = 'Move Cursor to bottom of window - then centre' })
 set('n', '<c-u>', '<c-u>zz', { desc = 'Move Cursor to top of window - then centre' })
-
 
 -- INFO: WINDOWS, TABS and BUFFERS
 --  See `:help wincmd` for a list of all window commands
@@ -118,33 +116,35 @@ set('n', '<leader>wh', '<C-w>H', { desc = 'Move [W]indow Left' })
 set('n', '<leader>wj', '<C-w>J', { desc = 'Move [W]indow Down' })
 set('n', '<leader>wk', '<C-w>K', { desc = 'Move [W]indow Up' })
 
-
 -- INFO: Terminals
 -- New terminals
-set('n', '<leader>tr', function()
-    new_terminal_r()
+set('n', '<leader>tR', function()
+  new_terminal_r()
 end, { desc = 'Create new [T]erminal - [R]' })
 
+set('n', '<leader>tr', function()
+  new_terminal_radian()
+end, { desc = 'Create new [T]erminal - [R]adian' })
+
 set('n', '<leader>tp', function()
-    new_terminal_python()
+  new_terminal_python()
 end, { desc = 'Create new [T]erminal - [Python]' })
 
 set('n', '<leader>ti', function()
-    new_terminal_ipython()
+  new_terminal_ipython()
 end, { desc = 'Create new [T]erminal - [IPython]' })
 
-set('n', '<leader>ts', function()
-    new_terminal_shell()
+set('n', '<leader>tt', function()
+  new_terminal_shell()
 end, { desc = 'Create new [T]erminal - [Shell]' })
-
 
 -- INFO: Diagnostics
 set('n', '[d', function()
-    vim.diagnostic.jump { count = 1, float = true }
+  vim.diagnostic.jump { count = 1, float = true }
 end, { desc = 'Go to previous [D]iagnostic message' })
 
 set('n', ']d', function()
-    vim.diagnostic.jump { count = -1, float = true }
+  vim.diagnostic.jump { count = -1, float = true }
 end, { desc = 'Go to next [D]iagnostic message' })
 
 set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
@@ -153,13 +153,13 @@ set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]ui
 -- Toggle virtual lines and text
 -- All LSP keymas start with leader g
 set('n', '<leader>gt', function()
-    vim.diagnostic.config {
-        virtual_lines = not vim.diagnostic.config().virtual_lines,
-        -- virtual_text = not vim.diagnostic.config().virtual_text,
-    }
-    require('tiny-inline-diagnostic').toggle()
+  vim.diagnostic.config {
+    virtual_lines = not vim.diagnostic.config().virtual_lines,
+    -- virtual_text = not vim.diagnostic.config().virtual_text,
+  }
+  require('tiny-inline-diagnostic').toggle()
 end, { desc = 'Diagnostics [T]oggle - virtual lines and virtual text' })
 
 set('n', '<leader>gh', function()
-    vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 end, { desc = 'Diagnostics [H]ide - all' })

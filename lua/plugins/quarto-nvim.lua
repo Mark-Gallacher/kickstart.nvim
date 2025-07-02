@@ -58,11 +58,7 @@ return {
     config = function()
       local q = require 'quarto'
 
-      q.setup {
-        lspFeatures = {
-          enabled = false,
-        },
-      }
+      q.setup {}
       local runner = require 'quarto.runner'
 
       q.quartoSend = runner.run_cell
