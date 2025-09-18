@@ -19,6 +19,7 @@ local function get_path()
 end
 
 vim.api.nvim_set_keymap('n', '<leader>ob', ':ObsidianBacklinks <CR>', {})
+vim.api.nvim_set_keymap('n', '<leader>of', ':!python D:/Documents/Obsidian_to_Anki-3.6.0/obsidian_to_anki.py %:p<CR>', {})
 
 return {
   {
